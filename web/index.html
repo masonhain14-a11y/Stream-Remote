@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#171b27">
+  <title>Stream Remote</title>
+  <link rel="icon" href="/icons/app.png">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-inner">
+      <div class="brand"><span class="brand-icon"><i data-icon="app"></i></span><span>Stream Remote</span></div>
+      <button id="connection" class="connection" type="button" aria-expanded="false" aria-controls="connection-menu" disabled><span></span><b>Connecting</b></button>
+      <div id="connection-menu" class="connection-menu" hidden>
+        <p><i data-icon="monitor"></i><span id="host-address"></span></p>
+        <button id="disconnect" type="button">Disconnect this browser</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="pair" class="pair" hidden>
+      <div class="pair-icon"><i data-icon="monitor"></i></div>
+      <h1>Pair with your PC</h1>
+      <p class="intro">Enter the six-digit code shown in Stream Remote on your Windows PC.</p>
+      <form id="pair-form">
+        <label for="pair-code">Pairing code</label>
+        <input id="pair-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" type="text" placeholder="000000" required>
+        <button type="submit" class="primary">Connect <i data-icon="arrow-right"></i></button>
+      </form>
+      <p id="pair-message" class="pair-message" role="status"></p>
+    </section>
+
+    <div id="controls" hidden>
+      <section id="streaming" class="panel" aria-labelledby="streaming-title">
+        <div class="section-head">
+          <div><h1 id="streaming-title">Streaming</h1><p class="intro">Open a service on your PC.</p></div>
+          <span class="head-icon"><i data-icon="monitor"></i></span>
+        </div>
+        <label class="search">
+          <i data-icon="search"></i>
+          <input id="search" type="search" placeholder="Find a service" aria-label="Find a streaming service" autocomplete="off">
+        </label>
+        <div class="list-heading"><h2>Services</h2><span id="service-count"></span></div>
+        <div id="service-grid" class="service-grid"></div>
+        <p id="empty-services" class="empty-services" hidden>No services match your search.</p>
+      </section>
+
+      <section id="mouse" class="panel" aria-labelledby="mouse-title" hidden>
+        <div class="section-head">
+          <div><h1 id="mouse-title">Mouse</h1><p class="intro">Move the cursor with your phone.</p></div>
+          <span class="head-icon"><i data-icon="mouse"></i></span>
+        </div>
+        <div id="trackpad" class="trackpad" aria-label="Trackpad. Slide one finger to move, tap to click, or slide two fingers to scroll.">
+          <div class="track-guide" aria-hidden="true"><i data-icon="cursor"></i><strong>Trackpad</strong><span>Tap to click · Two fingers to scroll</span></div>
+          <span class="track-corner" aria-hidden="true"></span>
+        </div>
+        <div class="action-row mouse-buttons">
+          <button type="button" class="soft-key" data-click="left"><i data-icon="left-click"></i>Left click</button>
+          <button type="button" class="soft-key" data-click="right"><i data-icon="right-click"></i>Right click</button>
+          <button id="drag" type="button" class="soft-key" aria-pressed="false"><i data-icon="move"></i><span>Drag</span></button>
+        </div>
+        <div class="setting"><label for="sensitivity">Pointer speed</label><input id="sensitivity" type="range" min="0.5" max="3" step="0.1" value="1.4"></div>
+      </section>
+
+      <section id="keyboard" class="panel" aria-labelledby="keyboard-title" hidden>
+        <div class="section-head">
+          <div><h1 id="keyboard-title">Keyboard</h1><p class="intro">Type into the active window on your PC.</p></div>
+          <span class="head-icon"><i data-icon="keyboard"></i></span>
+        </div>
+        <div class="compose">
+          <div class="compose-head">
+            <label for="text-box">Text</label>
+            <label class="live-option"><input id="live" type="checkbox"><span></span>Live typing</label>
+          </div>
+          <textarea id="text-box" rows="5" maxlength="1500" placeholder="Tap to type…" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" aria-describedby="typing-help"></textarea>
+          <p id="typing-help">Write a message, then tap Send text.</p>
+          <button id="send-text" class="primary" type="button" disabled><i data-icon="send"></i> Send text</button>
+        </div>
+        <div class="list-heading keyboard-heading"><h2>Quick keys</h2></div>
+        <div class="action-row quick-keys">
+          <button type="button" class="soft-key" data-key="escape">Esc</button>
+          <button type="button" class="soft-key" data-key="tab">Tab</button>
+          <button type="button" class="soft-key" data-key="space">Space</button>
+          <button type="button" class="soft-key" data-key="backspace"><i data-icon="backspace"></i><span>Delete</span></button>
+          <button type="button" class="soft-key" data-key="enter"><i data-icon="enter"></i><span>Enter</span></button>
+          <button type="button" class="soft-key" data-key="selectAll">Select all</button>
+        </div>
+      </section>
+
+      <section id="remote" class="panel" aria-labelledby="remote-title" hidden>
+        <div class="section-head">
+          <div><h1 id="remote-title">Remote</h1><p class="intro">Control playback and navigate your PC.</p></div>
+          <span class="head-icon"><i data-icon="remote"></i></span>
+        </div>
+        <div class="remote-layout">
+          <div class="media control-card">
+            <h2>Playback</h2>
+            <div class="media-row">
+              <button type="button" class="icon-key" data-key="previous" aria-label="Previous track"><i data-icon="previous"></i></button>
+              <button type="button" class="icon-key play-pause" data-key="playPause" aria-label="Play or pause"><i data-icon="play"></i></button>
+              <button type="button" class="icon-key" data-key="next" aria-label="Next track"><i data-icon="next"></i></button>
+            </div>
+            <div class="media-row volume-row">
+              <button type="button" class="icon-key" data-key="volumeDown" aria-label="Volume down"><i data-icon="volume-down"></i></button>
+              <button type="button" class="icon-key" data-key="mute" aria-label="Mute or unmute"><i data-icon="mute"></i></button>
+              <button type="button" class="icon-key" data-key="volumeUp" aria-label="Volume up"><i data-icon="volume-up"></i></button>
+            </div>
+          </div>
+          <div class="navigation control-card">
+            <h2>Navigation</h2>
+            <div class="dpad">
+              <button type="button" class="icon-key" data-key="up" aria-label="Up"><i data-icon="up"></i></button>
+              <button type="button" class="icon-key" data-key="left" aria-label="Left"><i data-icon="left"></i></button>
+              <button type="button" class="icon-key dpad-ok" data-key="enter" aria-label="OK (Enter)">OK</button>
+              <button type="button" class="icon-key" data-key="right" aria-label="Right"><i data-icon="right"></i></button>
+              <button type="button" class="icon-key" data-key="down" aria-label="Down"><i data-icon="down"></i></button>
+            </div>
+            <div class="action-row remote-buttons">
+              <button type="button" class="soft-key" data-key="browserBack"><i data-icon="undo"></i>Back</button>
+              <button type="button" class="soft-key" data-key="fullscreen"><i data-icon="expand"></i>Fullscreen</button>
+              <button type="button" class="soft-key" data-key="desktop"><i data-icon="monitor"></i>Desktop</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <noscript>Enable JavaScript to use Stream Remote.</noscript>
+  </main>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <nav id="tabs" class="tabs" aria-label="Remote controls" hidden>
+    <div class="tab-inner">
+      <button type="button" data-tab="streaming" aria-current="page"><span><i data-icon="grid"></i></span>Streaming</button>
+      <button type="button" data-tab="mouse"><span><i data-icon="mouse"></i></span>Mouse</button>
+      <button type="button" data-tab="keyboard"><span><i data-icon="keyboard"></i></span>Keyboard</button>
+      <button type="button" data-tab="remote"><span><i data-icon="remote"></i></span>Remote</button>
+    </div>
+  </nav>
+</body>
+</html>

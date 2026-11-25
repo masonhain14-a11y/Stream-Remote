@@ -1,0 +1,12 @@
+[
+  {"id":"netflix","name":"Netflix","mark":"NETFLIX","url":"https://www.netflix.com/"},
+  {"id":"youtube","name":"YouTube","mark":"YouTube","url":"https://www.youtube.com/"},
+  {"id":"prime","name":"Prime Video","mark":"prime video","url":"https://www.primevideo.com/"},
+  {"id":"disney","name":"Disney+","mark":"Disney+","url":"https://www.disneyplus.com/"},
+  {"id":"max","name":"HBO Max","mark":"HBO Max","url":"https://www.hbomax.com/"},
+  {"id":"hulu","name":"Hulu","mark":"hulu","url":"https://www.hulu.com/"},
+  {"id":"apple","name":"Apple TV","mark":"Apple TV","url":"https://tv.apple.com/"},
+  {"id":"peacock","name":"Peacock","mark":"peacock","url":"https://www.peacocktv.com/"},
+  {"id":"paramount","name":"Paramount+","mark":"Paramount+","url":"https://www.paramountplus.com/"},
+  {"id":"spotify","name":"Spotify","mark":"Spotify","url":"https://open.spotify.com/"}
+]

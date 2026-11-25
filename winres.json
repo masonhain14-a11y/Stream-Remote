@@ -1,0 +1,22 @@
+{
+  "RT_GROUP_ICON": {"#1": {"0000": "app.ico"}},
+  "RT_MANIFEST": {"#1": {"0409": {
+    "identity": {"name": "StreamRemote", "version": "1.0.0.0"},
+    "description": "Stream Remote for Windows",
+    "minimum-os": "win10",
+    "execution-level": "as invoker",
+    "dpi-awareness": "unaware",
+    "gdi-scaling": true,
+    "use-common-controls-v6": true
+  }}},
+  "RT_VERSION": {"#1": {"0000": {
+    "fixed": {"file_version": "1.0.0.0", "product_version": "1.0.0.0"},
+    "info": {"0409": {
+      "FileDescription": "Stream Remote for Windows",
+      "FileVersion": "1.0.0",
+      "ProductName": "Stream Remote",
+      "ProductVersion": "1.0.0",
+      "OriginalFilename": "Stream Remote.exe"
+    }}
+  }}}
+}
